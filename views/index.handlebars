@@ -12,6 +12,26 @@
         <h1 class="page-headers">Welcome to</h1>
         <h3 class="page-headers">Headline Chat</h3>
     </div>
+    <div class="card">
+        <div class="card-header">
+            The Headlines
+        </div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                {{#each hbsObj.article}}
+                <li class="list-group-item">
+                    <h5 class="title" id="{{_id}}" data-id="{{_id}}">{{title}}</h5>
+                    <a href="{{link}}">{{link}}</a>
+                    <div>
+                        <ul id="notes{{_id}}">
+                        </ul>
+                    </div>
+                    <div class="input-group mb-3" id="notesInput{{_id}}"></div>
+                </li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
 
 </div>
 
@@ -31,4 +51,5 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
-<script src="js/java.js"></script>
+<script src="java/index.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
