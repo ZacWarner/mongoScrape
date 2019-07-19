@@ -70,6 +70,7 @@ module.exports = function (app) {
 
   app.post("/api/articles/:id", function (req, res) {
     // Create a new note and pass the req.body to the entry
+    console.log(req.body);
     db.Note.create(req.body)
 
       .then(function (dbNote) {

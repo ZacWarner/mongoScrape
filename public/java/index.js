@@ -5,7 +5,9 @@ $(document).ready(function () {
         var thisId = $(this).attr("data-id");
         var notes = "#notes" + thisId;
         var noteInput = "#notesInput" + thisId;
+        var userNameIdDiv = "#usrNameDiv" + thisId;
         $(noteInput).empty();
+        $(userNameIdDiv).empty();
         console.log(thisId)
 
         $.ajax({
@@ -19,24 +21,40 @@ $(document).ready(function () {
                     showNotes(data, notes);
                 };
 
-                let input = $("<input>").addClass("form-control")
-                    .attr("id", "noteBody")
-                    .attr("type", "text")
-                    .attr("placeholder", "Your Note");
-                let btnDiv = $("<div>").addClass("input-group-append");
-                let btn = $("<button>").addClass("btn btn-primary").attr("type", "button").attr("id", "submit").attr("data-id", data[0]._id).text("Post");
 
-                btnDiv.append(btn);
+                let user = $("#userName").attr("data-id");
+                let userNameId = user + data[0]._id
 
+                if (user) {
+                    let usrName = $("<h6>").attr("id", userNameId).html(user);
+                    $(userNameIdDiv).append(usrName);
+
+                    let input = $("<input>").addClass("form-control")
+                        .attr("id", "noteBody")
+                        .attr("type", "text")
+                        .attr("placeholder", "Your Note");
+                    let btnDiv = $("<div>").addClass("input-group-append");
+                    let btn = $("<button>").addClass("btn btn-primary").attr("type", "button").attr("id", "submit").attr("data-id", data[0]._id).text("Post");
+
+                    btnDiv.append(btn);
+
+
+
+
+                    $(noteInput).append(input, btnDiv);
+                }
+                else {
+                    let msg = $("<h6>").html("Login to join the conversation!");
+                    $(noteInput).append(msg);
+                };
                 let controlDiv = $("<div>").addClass("container mt-1 text-center");
 
                 let hideBtn = $("<button>").addClass("btn btn-warning mx-2").attr("type", "button").attr("id", "hide").attr("data-id", data[0]._id).text("Hide");
                 let refreshBtn = $("<button>").addClass("btn btn-success mx-2").attr("type", "button").attr("id", "refresh").attr("data-id", data[0]._id).text("refresh");
 
+
                 controlDiv.append(hideBtn, refreshBtn);
-
-                $(noteInput).append(input, btnDiv, controlDiv);
-
+                $(noteInput).append(controlDiv);
             });
 
 
@@ -48,10 +66,10 @@ $(document).ready(function () {
 
         $(data[0].note).each(function (i, note) {
             console.log(data);
-            let li = $("<li>");
-            // let title = $("<p>").html(data.note.title);
+            let li = $("<li>").addClass("list-group-item");
+            let name = $("<h6>").html(note.name + ":");
             let body = $("<p>").html(note.body);
-            li.append(body);
+            li.append(name, body);
 
             $(notes).append(li)
         });
@@ -60,7 +78,10 @@ $(document).ready(function () {
     $(document).on("click", "#submit", function () {
         // Grab the id associated with the article from the submit button
         var thisId = $(this).attr("data-id");
+        let user = $("#userName").attr("data-id");
         var notes = "#notes" + thisId;
+
+
 
         // Run a POST request to change the note, using what's entered in the inputs
         $.ajax({
@@ -68,7 +89,7 @@ $(document).ready(function () {
             url: "/api/articles/" + thisId,
             data: {
                 // Value taken from title input
-                title: $("#titleinput").val(),
+                name: user,
                 // Value taken from note textarea
                 body: $("#noteBody").val()
             }
@@ -90,9 +111,11 @@ $(document).ready(function () {
         var thisId = $(this).attr("data-id");
         var notes = "#notes" + thisId;
         var noteInput = "#notesInput" + thisId;
-
+        var userNameIdDiv = "#usrNameDiv" + thisId;
         $(notes).empty();
         $(noteInput).empty();
+        $(userNameIdDiv).empty();
+
 
     });
 
@@ -102,7 +125,9 @@ $(document).ready(function () {
         var thisId = $(this).attr("data-id");
         var notes = "#notes" + thisId;
         var noteInput = "#notesInput" + thisId;
+        var userNameIdDiv = "#usrNameDiv" + thisId;
         $(noteInput).empty();
+        $(userNameIdDiv).empty();
         console.log(thisId)
 
         $.ajax({

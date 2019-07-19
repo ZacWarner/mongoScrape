@@ -12,6 +12,7 @@ module.exports = function (app) {
           user: req.user,
           article: dbArticle
         };
+        console.log(req.user);
         console.log(hbsObj.article)
         // If we were able to successfully find Articles, send them back to the client
         res.render("index", { hbsObj: hbsObj });
@@ -24,8 +25,20 @@ module.exports = function (app) {
   });
 
   app.get("/signup", function (req, res) {
+    let hbsObj = {
+      user: req.user,
 
+    };
 
-    res.render("signup");
+    res.render("signup", { hbsObj: hbsObj });
+  })
+
+  app.get("/login", function (req, res) {
+    let hbsObj = {
+      user: req.user,
+
+    };
+
+    res.render("login", { hbsObj: hbsObj });
   })
 };

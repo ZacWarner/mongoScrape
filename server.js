@@ -55,6 +55,7 @@ app.set("view engine", "handlebars");
 // Routes
 require("./routes/htmlRoutes")(app);
 require("./routes/apiRoutes")(app);
+require("./routes/loginRoutes")(app);
 
 
 // If running a test, set syncOptions.force to true
