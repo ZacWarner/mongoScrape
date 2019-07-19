@@ -112,6 +112,7 @@ $(document).ready(function () {
         var notes = "#notes" + thisId;
         var noteInput = "#notesInput" + thisId;
         var userNameIdDiv = "#usrNameDiv" + thisId;
+        console.log(userNameIdDiv);
         $(notes).empty();
         $(noteInput).empty();
         $(userNameIdDiv).empty();
