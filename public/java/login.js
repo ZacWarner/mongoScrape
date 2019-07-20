@@ -32,7 +32,7 @@ $(document).ready(function () {
 
 
     const handleLoginError = (err) => {
-        $("#alert .msg").text("User name already exists");
+        $("#alert .msg").text("Incorrect password");
         $("#alert").fadeIn(500);
     };
 
