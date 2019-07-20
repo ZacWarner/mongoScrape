@@ -142,24 +142,40 @@ $(document).ready(function () {
                     showNotes(data, notes);
                 };
 
-                let input = $("<input>").addClass("form-control")
-                    .attr("id", "noteBody")
-                    .attr("type", "text")
-                    .attr("placeholder", "Your Note");
-                let btnDiv = $("<div>").addClass("input-group-append");
-                let btn = $("<button>").addClass("btn btn-primary").attr("type", "button").attr("id", "submit").attr("data-id", data[0]._id).text("Post");
 
-                btnDiv.append(btn);
+                let user = $("#userName").attr("data-id");
+                let userNameId = user + data[0]._id
 
+                if (user) {
+                    let usrName = $("<h6>").attr("id", userNameId).html(user);
+                    $(userNameIdDiv).append(usrName);
+
+                    let input = $("<input>").addClass("form-control")
+                        .attr("id", "noteBody")
+                        .attr("type", "text")
+                        .attr("placeholder", "Your Note");
+                    let btnDiv = $("<div>").addClass("input-group-append");
+                    let btn = $("<button>").addClass("btn btn-primary").attr("type", "button").attr("id", "submit").attr("data-id", data[0]._id).text("Post");
+
+                    btnDiv.append(btn);
+
+
+
+
+                    $(noteInput).append(input, btnDiv);
+                }
+                else {
+                    let msg = $("<h6>").html("Login to join the conversation!");
+                    $(noteInput).append(msg);
+                };
                 let controlDiv = $("<div>").addClass("container mt-1 text-center");
 
                 let hideBtn = $("<button>").addClass("btn btn-warning mx-2").attr("type", "button").attr("id", "hide").attr("data-id", data[0]._id).text("Hide");
                 let refreshBtn = $("<button>").addClass("btn btn-success mx-2").attr("type", "button").attr("id", "refresh").attr("data-id", data[0]._id).text("refresh");
 
+
                 controlDiv.append(hideBtn, refreshBtn);
-
-                $(noteInput).append(input, btnDiv, controlDiv);
-
+                $(noteInput).append(controlDiv);
             });
 
 
